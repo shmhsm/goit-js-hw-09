@@ -15,27 +15,22 @@ if (savedData) {
 
 form.addEventListener("input", (event) => {
     const { name, value } = event.target;
-    
-    formData[name] = value; 
-    
+    formData[name] = value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 });
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const finalEmail = formData.email.trim();
-    const finalMessage = formData.message.trim();
+    formData.email = formData.email.trim();
+    formData.message = formData.message.trim();
 
-    if (finalEmail === "" || finalMessage === "") {
+    if (formData.email === "" || formData.message === "") {
         alert("Fill please all fields");
         return;
     }
 
-    console.log({
-        email: finalEmail,
-        message: finalMessage
-    });
+    console.log(formData);
     
     localStorage.removeItem(STORAGE_KEY);
     formData = { email: "", message: "" };
